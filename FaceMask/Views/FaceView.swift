@@ -10,6 +10,15 @@ import Vision
 
 class FaceView: UIView {
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .clear
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     var leftEye: [CGPoint] = []
     var rightEye: [CGPoint] = []
     var leftEyebrow: [CGPoint] = []
@@ -39,6 +48,8 @@ class FaceView: UIView {
     }
 
     override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
         // 1
         guard let context = UIGraphicsGetCurrentContext() else {
             return

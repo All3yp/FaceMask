@@ -12,7 +12,7 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
-    let faceView = FaceView()
+    let faceView = FaceView(frame: UIScreen.main.bounds)
 
     let widthX: CGFloat = UIScreen.main.bounds.width/2
     let heightY: CGFloat = UIScreen.main.bounds.height/10
@@ -28,9 +28,20 @@ class ViewController: UIViewController {
     var sequenceHandler = VNSequenceRequestHandler()
     var previewLayer: AVCaptureVideoPreviewLayer!
 
+    let dataOutputQueue = DispatchQueue(
+        label: "video data queue",
+        qos: .userInitiated,
+        attributes: [],
+        autoreleaseFrequency: .workItem)
+
+    var maxX: CGFloat = 0.0
+    var midY: CGFloat = 0.0
+    var maxY: CGFloat = 0.0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(maskLabel)
+        view.addSubview(faceView)
 
         maskLabel.backgroundColor = .darkGray
         maskLabel.text = "A label"
@@ -43,16 +54,6 @@ class ViewController: UIViewController {
 
         session.startRunning()
     }
-
-    let dataOutputQueue = DispatchQueue(
-        label: "video data queue",
-        qos: .userInitiated,
-        attributes: [],
-        autoreleaseFrequency: .workItem)
-
-    var maxX: CGFloat = 0.0
-    var midY: CGFloat = 0.0
-    var maxY: CGFloat = 0.0
 
 }
 
@@ -96,5 +97,58 @@ extension ViewController {
 // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate methods
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+
+        // 1. Get the image buffer from the passed in sample buffer.
+        guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            return
+        }
+
+        // 2. Create a face detection request to detect face bounding boxes and pass the results to a completion handler.
+        let detectFaceRequest = VNDetectFaceRectanglesRequest(completionHandler: detectedFace)
+
+        // 3. Use your previously defined sequence request handler to perform your face detection request on the image. The orientation parameter tells the request handler what the orientation of the input image is.
+        do {
+            try sequenceHandler.perform(
+                [detectFaceRequest],
+                on: imageBuffer,
+                orientation: .leftMirrored)
+        } catch {
+            print(error.localizedDescription)
+        }
+
+    }
+
+    func detectedFace(request: VNRequest, error: Error?) {
+        // 1. Extract the first result from the array of face observation results.
+        guard
+            let results = request.results as? [VNFaceObservation],
+            let result = results.first
+        else {
+            // 2. Clear the FaceView if something goes wrong or no face is detected.
+            faceView.clear()
+            return
+        }
+
+        // 3. Set the bounding box to draw in the FaceView after converting it from the coordinates in the VNFaceObservation.
+        let box = result.boundingBox
+        faceView.boundingBox = convert(rect: box)
+
+        // 4. Call setNeedsDisplay() to make sure the FaceView is redrawn.
+        DispatchQueue.main.async {
+            self.faceView.setNeedsDisplay()
+        }
+
+
+    }
+
+    func convert(rect: CGRect) -> CGRect {
+        // 1. Use a handy method from AVCaptureVideoPreviewLayer to convert a normalized origin to the preview layer’s coordinate system.
+        let origin = previewLayer.layerPointConverted(fromCaptureDevicePoint: rect.origin)
+
+        // 2. Then use the same handy method along with some nifty Core Graphics extensions to convert the normalized size to the preview layer’s coordinate system.
+        let size = previewLayer.layerPointConverted(fromCaptureDevicePoint: rect.size.cgPoint)
+
+        // 3. Create a CGRect using the new origin and size.
+        return CGRect(origin: origin, size: size.cgSize)
     }
 }
