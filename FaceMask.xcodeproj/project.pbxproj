@@ -12,10 +12,6 @@
 		188C5E31267B8241007075D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188C5E30267B8241007075D2 /* ViewController.swift */; };
 		188C5E36267B8244007075D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 188C5E35267B8244007075D2 /* Assets.xcassets */; };
 		188C5E39267B8244007075D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188C5E37267B8244007075D2 /* LaunchScreen.storyboard */; };
-		18E2951F267BBB4900BAC8E4 /* SavedModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 18E29519267BBB4900BAC8E4 /* SavedModel.mlmodel */; };
-		18E29520267BBB4900BAC8E4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 18E2951B267BBB4900BAC8E4 /* README.md */; };
-		18E29521267BBB4900BAC8E4 /* labels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 18E2951C267BBB4900BAC8E4 /* labels.txt */; };
-		18E29523267BBB4900BAC8E4 /* signature.json in Resources */ = {isa = PBXBuildFile; fileRef = 18E2951E267BBB4900BAC8E4 /* signature.json */; };
 		18E29525267BDA1100BAC8E4 /* FaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E29524267BDA1100BAC8E4 /* FaceView.swift */; };
 		18E29527267BEA0200BAC8E4 /* FaceMaskClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 18E29526267BEA0200BAC8E4 /* FaceMaskClassifier.mlmodel */; };
 /* End PBXBuildFile section */
@@ -28,10 +24,6 @@
 		188C5E35267B8244007075D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		188C5E38267B8244007075D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		188C5E3A267B8244007075D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18E29519267BBB4900BAC8E4 /* SavedModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SavedModel.mlmodel; sourceTree = "<group>"; };
-		18E2951B267BBB4900BAC8E4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		18E2951C267BBB4900BAC8E4 /* labels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = labels.txt; sourceTree = "<group>"; };
-		18E2951E267BBB4900BAC8E4 /* signature.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signature.json; sourceTree = "<group>"; };
 		18E29524267BDA1100BAC8E4 /* FaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceView.swift; sourceTree = "<group>"; };
 		18E29526267BEA0200BAC8E4 /* FaceMaskClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = FaceMaskClassifier.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,31 +63,11 @@
 				18E29537267C10F800BAC8E4 /* Views */,
 				18E29538267C110200BAC8E4 /* Controllers */,
 				18E29536267C10EA00BAC8E4 /* Model */,
-				18E29518267BBB4900BAC8E4 /* dataset Core ML */,
 				188C5E35267B8244007075D2 /* Assets.xcassets */,
 				188C5E37267B8244007075D2 /* LaunchScreen.storyboard */,
 				188C5E3A267B8244007075D2 /* Info.plist */,
 			);
 			path = FaceMask;
-			sourceTree = "<group>";
-		};
-		18E29518267BBB4900BAC8E4 /* dataset Core ML */ = {
-			isa = PBXGroup;
-			children = (
-				18E29519267BBB4900BAC8E4 /* SavedModel.mlmodel */,
-				18E2951A267BBB4900BAC8E4 /* example */,
-				18E2951C267BBB4900BAC8E4 /* labels.txt */,
-				18E2951E267BBB4900BAC8E4 /* signature.json */,
-			);
-			path = "dataset Core ML";
-			sourceTree = "<group>";
-		};
-		18E2951A267BBB4900BAC8E4 /* example */ = {
-			isa = PBXGroup;
-			children = (
-				18E2951B267BBB4900BAC8E4 /* README.md */,
-			);
-			path = example;
 			sourceTree = "<group>";
 		};
 		18E29536267C10EA00BAC8E4 /* Model */ = {
@@ -179,11 +151,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18E29520267BBB4900BAC8E4 /* README.md in Resources */,
 				188C5E39267B8244007075D2 /* LaunchScreen.storyboard in Resources */,
-				18E29523267BBB4900BAC8E4 /* signature.json in Resources */,
 				188C5E36267B8244007075D2 /* Assets.xcassets in Resources */,
-				18E29521267BBB4900BAC8E4 /* labels.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +166,6 @@
 				188C5E31267B8241007075D2 /* ViewController.swift in Sources */,
 				18E29527267BEA0200BAC8E4 /* FaceMaskClassifier.mlmodel in Sources */,
 				18E29525267BDA1100BAC8E4 /* FaceView.swift in Sources */,
-				18E2951F267BBB4900BAC8E4 /* SavedModel.mlmodel in Sources */,
 				188C5E2D267B8241007075D2 /* AppDelegate.swift in Sources */,
 				188C5E2F267B8241007075D2 /* SceneDelegate.swift in Sources */,
 			);
