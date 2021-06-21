@@ -44,8 +44,8 @@ class FaceViewController: UIViewController {
         view.addSubview(maskLabel)
         view.addSubview(faceView)
 
-        maskLabel.backgroundColor = .darkGray
-        maskLabel.text = "A label"
+        maskLabel.backgroundColor = .darkText
+        maskLabel.font = UIFont.systemFont(ofSize: 25)
 
         configureCaptureSession()
         requestModel()
@@ -171,7 +171,10 @@ extension FaceViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
                                                     completionHandler: { (request, error) in
                 DispatchQueue.main.async(execute: {
                     // perform all the UI updates on the main queue
-                    _ = request.results
+                    guard let observation = request.results?.first as? VNClassificationObservation,
+                          observation.confidence > 0.5 else { return }
+                    self.maskLabel.text = "  \(observation.identifier) \(observation.confidence)"
+                    print("\(observation.identifier) \(observation.confidence)")
                 })
             })
             self.requests = [objectRecognition]
