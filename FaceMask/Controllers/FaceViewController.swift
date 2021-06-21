@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FaceViewController.swift
 //  FaceMask
 //
 //  Created by Alley Pereira on 17/06/21.
@@ -10,8 +10,9 @@ import CoreML
 import Vision
 import AVFoundation
 
-class ViewController: UIViewController {
+class FaceViewController: UIViewController {
 
+    private var requests = [VNRequest]()
     let faceView = FaceView(frame: UIScreen.main.bounds)
 
     let widthX: CGFloat = UIScreen.main.bounds.width/2
@@ -47,6 +48,7 @@ class ViewController: UIViewController {
         maskLabel.text = "A label"
 
         configureCaptureSession()
+        requestModel()
 
         maxX = view.bounds.maxX
         midY = view.bounds.midY
@@ -58,7 +60,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: - Video Processing methods
-extension ViewController {
+extension FaceViewController {
     func configureCaptureSession() {
         // Define the capture device we want to use
         guard let camera = AVCaptureDevice.default(.builtInWideAngleCamera,
@@ -95,7 +97,8 @@ extension ViewController {
 }
 
 // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate methods
-extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+extension FaceViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
 
         // 1. Get the image buffer from the passed in sample buffer.
@@ -116,6 +119,13 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             print(error.localizedDescription)
         }
 
+        let handler = VNImageRequestHandler(cmSampleBuffer: sampleBuffer, options: [:])
+
+        do {
+            try handler.perform(requests)
+        } catch {
+            print(error)
+        }
     }
 
     func detectedFace(request: VNRequest, error: Error?) {
@@ -137,8 +147,6 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         DispatchQueue.main.async {
             self.faceView.setNeedsDisplay()
         }
-
-
     }
 
     func convert(rect: CGRect) -> CGRect {
@@ -151,4 +159,26 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         // 3. Create a CGRect using the new origin and size.
         return CGRect(origin: origin, size: size.cgSize)
     }
+
+    func requestModel() {
+
+        do {
+
+            let classifier = try FaceMaskClassifier(configuration: MLModelConfiguration())
+            let visionModel = try VNCoreMLModel(for: classifier.model)
+
+            let objectRecognition = VNCoreMLRequest(model: visionModel,
+                                                    completionHandler: { (request, error) in
+                DispatchQueue.main.async(execute: {
+                    // perform all the UI updates on the main queue
+                    _ = request.results
+                })
+            })
+            self.requests = [objectRecognition]
+
+        } catch let error as NSError {
+            print("Model loading went wrong: \(error)")
+        }
+    }
+    
 }
