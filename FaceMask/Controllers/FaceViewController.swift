@@ -160,6 +160,7 @@ extension FaceViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         return CGRect(origin: origin, size: size.cgSize)
     }
 
+    // MARK: - Request Model
     func requestModel() {
 
         do {
@@ -175,6 +176,12 @@ extension FaceViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
                           observation.confidence > 0.5 else { return }
                     self.maskLabel.text = "  \(observation.identifier) \(observation.confidence)"
                     print("\(observation.identifier) \(observation.confidence)")
+
+                    if observation.identifier == "with_mask" {
+                        self.maskLabel.backgroundColor = .systemGreen
+                    } else {
+                        self.maskLabel.backgroundColor = .systemRed
+                    }
                 })
             })
             self.requests = [objectRecognition]
@@ -183,5 +190,4 @@ extension FaceViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             print("Model loading went wrong: \(error)")
         }
     }
-    
 }
