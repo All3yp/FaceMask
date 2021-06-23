@@ -7,17 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18843BC9268354A1008C1CD8 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18843BC8268354A1008C1CD8 /* RequestModel.swift */; };
+		18843BCF2683607F008C1CD8 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18843BCE2683607F008C1CD8 /* Camera.swift */; };
+		18843BD126836CE7008C1CD8 /* FaceDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18843BD026836CE7008C1CD8 /* FaceDetection.swift */; };
 		188C5E2D267B8241007075D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188C5E2C267B8241007075D2 /* AppDelegate.swift */; };
 		188C5E2F267B8241007075D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188C5E2E267B8241007075D2 /* SceneDelegate.swift */; };
 		188C5E31267B8241007075D2 /* FaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188C5E30267B8241007075D2 /* FaceViewController.swift */; };
 		188C5E36267B8244007075D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 188C5E35267B8244007075D2 /* Assets.xcassets */; };
 		188C5E39267B8244007075D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188C5E37267B8244007075D2 /* LaunchScreen.storyboard */; };
 		18C0BA9B2680D48700E2EC2D /* FaceMaskClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 18E29526267BEA0200BAC8E4 /* FaceMaskClassifier.mlmodel */; };
+		18D54AC426838DB600A714F8 /* MaskDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D54AC326838DB600A714F8 /* MaskDetection.swift */; };
 		18E29525267BDA1100BAC8E4 /* FaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E29524267BDA1100BAC8E4 /* FaceView.swift */; };
 		18E2953A267CD48B00BAC8E4 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E29539267CD48B00BAC8E4 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18843BC8268354A1008C1CD8 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
+		18843BCE2683607F008C1CD8 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		18843BD026836CE7008C1CD8 /* FaceDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetection.swift; sourceTree = "<group>"; };
 		188C5E29267B8241007075D2 /* FaceMask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceMask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		188C5E2C267B8241007075D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		188C5E2E267B8241007075D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -25,6 +32,7 @@
 		188C5E35267B8244007075D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		188C5E38267B8244007075D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		188C5E3A267B8244007075D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18D54AC326838DB600A714F8 /* MaskDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskDetection.swift; sourceTree = "<group>"; };
 		18E29524267BDA1100BAC8E4 /* FaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceView.swift; sourceTree = "<group>"; };
 		18E29526267BEA0200BAC8E4 /* FaceMaskClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = FaceMaskClassifier.mlmodel; sourceTree = "<group>"; };
 		18E29539267CD48B00BAC8E4 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -63,6 +71,7 @@
 				188C5E2C267B8241007075D2 /* AppDelegate.swift */,
 				188C5E2E267B8241007075D2 /* SceneDelegate.swift */,
 				18E29539267CD48B00BAC8E4 /* Extension.swift */,
+				18D54AC526838DE600A714F8 /* Configurations */,
 				18E29537267C10F800BAC8E4 /* Views */,
 				18E29538267C110200BAC8E4 /* Controllers */,
 				18E29536267C10EA00BAC8E4 /* Model */,
@@ -73,9 +82,20 @@
 			path = FaceMask;
 			sourceTree = "<group>";
 		};
+		18D54AC526838DE600A714F8 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				18D54AC326838DB600A714F8 /* MaskDetection.swift */,
+				18843BD026836CE7008C1CD8 /* FaceDetection.swift */,
+				18843BCE2683607F008C1CD8 /* Camera.swift */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
 		18E29536267C10EA00BAC8E4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18843BC8268354A1008C1CD8 /* RequestModel.swift */,
 				18E29526267BEA0200BAC8E4 /* FaceMaskClassifier.mlmodel */,
 			);
 			path = Model;
@@ -169,7 +189,11 @@
 				18C0BA9B2680D48700E2EC2D /* FaceMaskClassifier.mlmodel in Sources */,
 				188C5E31267B8241007075D2 /* FaceViewController.swift in Sources */,
 				18E29525267BDA1100BAC8E4 /* FaceView.swift in Sources */,
+				18843BD126836CE7008C1CD8 /* FaceDetection.swift in Sources */,
+				18843BCF2683607F008C1CD8 /* Camera.swift in Sources */,
 				18E2953A267CD48B00BAC8E4 /* Extension.swift in Sources */,
+				18843BC9268354A1008C1CD8 /* RequestModel.swift in Sources */,
+				18D54AC426838DB600A714F8 /* MaskDetection.swift in Sources */,
 				188C5E2D267B8241007075D2 /* AppDelegate.swift in Sources */,
 				188C5E2F267B8241007075D2 /* SceneDelegate.swift in Sources */,
 			);
